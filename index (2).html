@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>	</title>
+	<style type="text/css">
+		.sphere {
+			background: red;
+			width: 100px;
+			height: 100px;
+			position: absolute;
+			border-radius: 100px;
+			transition: all 0.8s ease-out;
+			top: 0px;
+		}
+		.ground {
+			background: green;
+			position: absolute;
+			width: 1200px;
+			height: 50px;
+			top:  900px;
+		}
+	</style>
+</head>
+<body>
+<h1>Score: <span class="score">0</span></h1>
+<div class="ground">
+	
+</div>
+<script>
+	let randomize = function(arg) {
+        let s = Math.random() * arg
+        let r = Math.round(s)
+        return r  
+	}
+
+	for(let i = 0; i<10; i += 1) {
+		let num = randomize(1000)
+		let box = document.createElement('div')
+        document.body.appendChild(box)
+        box.classList.add('sphere')
+		box.style.left = num + 'px'
+	}
+
+	let numS = 0
+	let scores = document.querySelector('.score')
+	let spheres = document.querySelectorAll('.sphere')
+	let topSph = 0
+	let id = 0
+
+	for(let i = 0; i<spheres.length; i++) {
+		spheres[i].onclick = function() {
+			spheres[i].style.display = 'none'
+			numS += 1
+			scores.innerHTML = numS
+			topSph = 900
+		}
+	}
+	let incrTop = function() {
+		topSph += 150
+		spheres[id].style.top = topSph + 'px'
+			if(topSph >= 1000) {
+				topSph = 0
+				spheres[id].style.display = 'none'
+				id += 1 
+				if(id == 10){
+					stopGame()
+				}
+			}
+	}
+	let setGame = setInterval(incrTop, 300)
+
+	let stopGame = function() {
+		clearInterval(setGame)
+	}
+	/* 
+		функция рандом:
+
+		цикл(10):
+			создаем div
+			поместить в body 
+			задать класс .sphere 
+			div left = рандом ()
+		
+		сферы = dqsAll(sphere)
+
+		topSph = 0
+
+		id = 0 
+
+		цикл(10):
+			сферы[i].onclick = {
+				сферы[i].style.display = none
+				topSph = 900
+			}
+		
+		функция увеличить топ:
+			topSph += 150
+			сферы[id].style.top = topSph + 'px'
+			if(topSph >= 1000px):
+				сферы[id].style.display = none
+				id += 1 
+				if(id == 9):
+					stopGame()
+		
+		let setGame = setInterval(увеличить топ, 300)
+
+		let stopGame = function() {
+			clearInterval(setGame)
+		}
+	*/
+</script>
+</body>
+</html>
